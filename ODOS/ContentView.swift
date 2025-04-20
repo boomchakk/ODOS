@@ -8,14 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = WorkoutViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            WorkoutView(viewModel: viewModel)
+                .tabItem {
+                    Label("Workout", systemImage: "dumbbell.fill")
+                }
+            
+            HistoryView(viewModel: viewModel)
+                .tabItem {
+                    Label("History", systemImage: "clock.fill")
+                }
+            
+            ExerciseInventoryView(viewModel: viewModel)
+                .tabItem {
+                    Label("Inventory", systemImage: "list.bullet")
+                }
+            
+            ProfileView()
+                .tabItem {
+                    Label("Profile", systemImage: "person.fill")
+                }
         }
-        .padding()
     }
 }
 
