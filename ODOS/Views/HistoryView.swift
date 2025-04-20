@@ -15,8 +15,10 @@ struct HistoryView: View {
                             VStack(alignment: .leading) {
                                 Text(exercise.name)
                                     .font(.subheadline)
-                                Text("Sets: \(exercise.sets) | Reps: \(exercise.reps) | Weight: \(exercise.weight) lbs")
-                                    .font(.caption)
+                                ForEach(exercise.sets) { set in
+                                    Text("Weight: \(Int(set.weight))kg | Reps: \(set.reps)")
+                                        .font(.caption)
+                                }
                             }
                             .padding(.leading)
                         }

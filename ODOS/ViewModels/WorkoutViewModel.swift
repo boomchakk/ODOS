@@ -2,7 +2,7 @@ import Foundation
 
 class WorkoutViewModel: ObservableObject {
     @Published var exerciseInventory: [String] = [
-        "Bench Press",
+        "Bench Press (Barbell)",
         "Squat",
         "Deadlift",
         "Overhead Press",
@@ -18,8 +18,16 @@ class WorkoutViewModel: ObservableObject {
         }
     }
     
-    func saveWorkout(exercises: [Exercise]) {
-        let workout = Workout(date: Date(), exercises: exercises)
+    func saveWorkout(_ workout: Workout) {
         workouts.append(workout)
+    }
+    
+    func getLastWorkout(for exerciseName: String) -> Exercise? {
+        for workout in workouts.reversed() {
+            if let exercise = workout.exercises.first(where: { $0.name == exerciseName }) {
+                return exercise
+            }
+        }
+        return nil
     }
 } 
